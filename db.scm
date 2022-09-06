@@ -22,8 +22,8 @@
     (define (init-db db-handler)
      ; Check if there are migrations TABLE in the db
      (let* ((table-names (sqlite:query db-handler "SELECT name FROM sqlite_schema WHERE type='table' ORDER BY name;"))
-            (are-migrations-there (memeber "migrations" table-names)))
-      (if (not are-mirgations-there)
+            (are-migrations-there (member "migrations" table-names)))
+      (if (not are-migrations-there)
         (sqlite:query db-handler "CREATE TABLE \"migrations\" (
           \"id\" INTEGER NOT NULL PRIMARY KEY,
           \"created_at\" timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -54,7 +54,7 @@
              (content (parse-string file)))
         (if content
           (transaction content)
-          (print "Can not open and process migration: ", filename))
+          (print "Can not open and process migration: " filename))
         (close-port file)))
 
     ; Function will get all migrations from files and database. Compare them and run migrations which are not in the DB. 
