@@ -1,8 +1,11 @@
-
+(define *path* (cons "./libs" *path*))
 (define-library (bubo server)
+  
   (import (otus lisp))
   (import (lib http))
   (import (lang macro))
+  (import (owl parse))
+  (import (parsers parsers))
 
   (export 
    server-start
@@ -20,6 +23,9 @@
     (define content-json "Content-Type: application/json")
     (define content-stream "Content-Type: application/octet-stream\n")
    
+    (define (get-body parser text content-length)
+       (let ((forced-list (ltake text (string->number content-length))))
+        (car (try-parse parser forced-list #false))))
 
     (define (send-file path fd send)
       (print "SEND FILE")
@@ -68,8 +74,11 @@
        "\n\n"
        content))
 
-    (define (request-dispatch req-type content fd send)
-      (cond
+    (define (request-dispatch req-type content request)
+      (print request)
+      (let* ((fd (get request 'fd #false))
+             (send (get request 'send #false)))
+       (cond
       ; static files
       ((eq? req-type 'static)
         (send-file content fd send))
@@ -78,21 +87,36 @@
         (send-api content fd send))                                  
       ; templates
       (else
-        (send-template content send))))
+        (send-template content send)))))
 
+    (define (logo)
+      "
+    ~\\___/~
+     (0 0)
+     ) V (
+      ! !
 
-    (define (server-start port router)
+   HOO! HOO!
+
+      "
+     )
+
+    (define (server-start port router) 
+      (print (logo))
+      (print "Bubo is owl-ing...")
       (http:run port (lambda (fd request headers body close)
                       (define (send . args)
-                        ;(print "ARGS:" args)
                         (for-each (lambda (arg)
                                     (display-to fd arg)) args))
-                 ;(print "FD:" fd)
-                 ;(print "REQUEST:" (route request))
-                 ;(print "BODY:" body)
-                 ;(print ":: " (syscall 51 fd))
-                 (router fd send request)
-                 (close #t)))
-     )
-   )
- )
+                 (let* ((content-length (get headers 'content-length "0"))
+                        (stringed-body (get-body get-string body content-length))
+                        (request-compact 
+                          (make-ff 
+                            (list 
+                              'body stringed-body
+                              'path request
+                              'headers headers
+                              'fd fd
+                              'send send)))) 
+                  (router request-compact))
+                 (close #t))))))

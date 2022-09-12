@@ -1,8 +1,13 @@
 
 {
-  "name": "package_name",
-  "author": "author_name",
-  "license": "license_name",
-  "deps": []
+  "name": "bubo",
+  "author": "v_m_v",
+  "license": "MIT",
+  "deps": [
+    "https://github.com/the-man-with-a-golden-mind/cmd",
+    "https://github.com/the-man-with-a-golden-mind/parsers",
+    "https://github.com/the-man-with-a-golden-mind/shot",
+    "https://github.com/the-man-with-a-golden-mind/parsers"
+  ]
 }
   
