@@ -3,25 +3,27 @@ Have you ever needed something, small, expresive with small memory footprint?
 
 Meet Bubo!
 
-    ~\___/~
-     (0 0)
-     ) V (
-      ! !
+![logo](logo.png)
 
 ## Description
 
 
 ## Requirements
 
-
+* [Ol](https://github.com/yuriy-chumak/ol)
+* Sqlite
+* Linux/Mac/FreeBSD
 
 ## How to use?
 
+TODO
 
 ## Tutorials
+
+TODO
 
 ## Many thanks to
 
 
 
-## If you would like to suppor Bubo
+## If you would like to support Bubo
