@@ -25,7 +25,7 @@
       (if (not are-migrations-there)
         (begin
           (print "Creating migration table!")
-          (sqlite:query db-handler "CREATE TABLE \"migrations\" (
+          (sqlite:query db-handler "CREATE TABLE IF NOT EXISTS \"migrations\" (
             \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,
             \"created_at\" timestamp DEFAULT CURRENT_TIMESTAMP,
             \"file_name\" STRING NOT NULL);")

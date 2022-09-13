@@ -25,12 +25,14 @@
    
     (define (get-body parser text content-length)
        (let ((forced-list (ltake text (string->number content-length))))
-        (car (try-parse parser forced-list #false))))
+        (if (< (length forced-list) 1)
+          #false
+          (car (try-parse parser forced-list #false)))))
 
     (define (send-file path fd send)
-      (print "SEND FILE")
+      ;(print "SEND FILE")
       (define stat (syscall 4 (if (string? path) (c-string path))))
-      (print "STAT:" stat)
+      ;(print "STAT:" stat)
       (if stat
           (cond
                                             ; regular file?
@@ -74,8 +76,15 @@
        "\n\n"
        content))
 
+    (define (redirect content send)
+      (send "HTTP/1.0 307\n"
+        (string-append "Location: " content "\n")
+        conn-close
+        server-version
+        "\n\n"))
+
     (define (request-dispatch req-type content request)
-      (print request)
+      ;(print request)
       (let* ((fd (get request 'fd #false))
              (send (get request 'send #false)))
        (cond
@@ -86,8 +95,13 @@
       ((eq? req-type 'api)
         (send-api content fd send))                                  
       ; templates
-      (else
-        (send-template content send)))))
+      ((eq? req-type 'template)
+        (send-template content send))
+      ((eq? req-type 'redirect)
+        (redirect content send))
+      (else 
+       (send-template content send))
+      )))
 
     (define (logo)
       "

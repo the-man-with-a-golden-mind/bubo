@@ -6,9 +6,10 @@ Meet Bubo!
 ![logo](logo.png)
 
 ## Description
-It is small, webby, birdy, featherly...it is Bubo.
 
-Web framework with templates, routing, sqlite support, middlewares (commint sooon!)
+It is small, webby, birdly, feathery ... it is Bubo.
+
+Web framework with templates, routing, SQLite, middlewares (coming soon!)
 
 ## Requirements
 
@@ -19,8 +20,9 @@ Web framework with templates, routing, sqlite support, middlewares (commint sooo
 ## How to use?
 
 There are a couple of ways. 
-The simplest one is to use [Bubo template](). 
-Just copy it into your working maschine and run `ol run.scm`
+The simplest way is to use [Bubo template]().
+
+Just clone it and run `ol run.scm`
 
 
 ## Tutorials
@@ -28,9 +30,19 @@ Just copy it into your working maschine and run `ol run.scm`
 I am working on a couple of them. 
 First of all:
 
-* [link shotener tutorial]()
+* link shotener tutorial
 * web blog tutorial
 * my own crypto asset management tutorial
+
+## TODO
+
+- [X] REST support
+- [X] Migrations support
+- [X] SQLite support
+- [X] HTML templates
+- [ ] Workers (50%)
+- [ ] Middlewares (70%)
+
 
 ## Many thanks to
 
