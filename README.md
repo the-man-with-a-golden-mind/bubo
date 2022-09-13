@@ -20,7 +20,7 @@ Web framework with templates, routing, SQLite, middlewares (coming soon!)
 ## How to use?
 
 There are a couple of ways. 
-The simplest way is to use [Bubo template]().
+The simplest way is to use [Bubo template](https://github.com/the-man-with-a-golden-mind/bubo_template).
 
 Just clone it and run `ol run.scm`
 
