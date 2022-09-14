@@ -21,7 +21,8 @@ Web framework with templates, routing, SQLite, middlewares (coming soon!)
 
 There are a couple of ways. 
 The simplest way is to use [Bubo template](https://github.com/the-man-with-a-golden-mind/bubo_example).
-Remember to use 'git clone' with '--recursive' as an option. 
+
+Remember to use `git clone` with `--recursive` as an option. 
 
 Just clone it and run `ol run.scm`
 
