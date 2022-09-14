@@ -16,7 +16,7 @@
     (define (route path)
       (let* ((http-method (vector-ref path 0))
              (http-path (vector-ref path 1))
-             (http-path-splitted (c/\// http-path)))
+             (http-path-splitted (c/?|\// http-path)))
         (flatten `(,http-method ,(cdr http-path-splitted)))))
 
 
