@@ -10,6 +10,7 @@
   (export 
    server-start
    request-dispatch
+   querystring
    )
   (begin
     (define server-version "Server: Bubo / 0.01 \n")
@@ -22,7 +23,18 @@
     (define content-html "Content-Type: text/html; charset=UTF-8\n")
     (define content-json "Content-Type: application/json")
     (define content-stream "Content-Type: application/octet-stream\n")
-   
+    
+
+    (define (querystring text)
+      (let* ((splitted (c/&/ text))
+             (flat-list (fold 
+                          (lambda (acc elem)
+                            (let ((split (c/=/ elem)))
+                              (cons* (string->symbol (car split)) (cdr split) acc)))
+                          '() splitted))
+             (dict (make-ff flat-list)))
+       dict))
+
     (define (get-body parser text content-length)
        (let ((forced-list (ltake text (string->number content-length))))
         (if (< (length forced-list) 1)
