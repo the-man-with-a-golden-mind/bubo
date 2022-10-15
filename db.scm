@@ -78,7 +78,7 @@
 
     ; Function will get the DB details and return the DB handler
     (define (conn-db database-handler db-conn-details)
-     (let ((db-path (get db-conn-details "path" ":memory:")))
+     (let ((db-path (get db-conn-details 'path ":memory:")))
       (print "Connecting into database: " db-path)
       (sqlite3_open db-path database-handler)
       (display " ...Connected!\n")))
